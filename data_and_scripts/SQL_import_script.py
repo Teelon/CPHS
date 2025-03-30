@@ -250,7 +250,7 @@ def create_and_populate_pims_database(csv_file, db_url):
 
 if __name__ == "__main__":
     # 🔹 Supabase connection URL (replace with actual credentials)
-    SUPABASE_DB_URL = "postgresql://postgres:Telbut08!@db.woydobevuajpylpawyqk.supabase.co:5432/postgres"
+    SUPABASE_DB_URL = "your_supabase_connection_string"
 
     # 🔹 Path to your CSV file
     CSV_FILE_PATH = "data1.csv"
