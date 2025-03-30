@@ -1,0 +1,265 @@
+export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[]
+
+export interface Database {
+  public: {
+    Tables: {
+      articles: {
+        Row: {
+          id: number
+          title: string
+          content: string
+          author: string
+          published: boolean
+          created_at: string
+          updated_at: string
+          featured_image_url: string | null
+          slug: string
+        }
+        Insert: {
+          id?: number
+          title: string
+          content: string
+          author: string
+          published?: boolean
+          created_at?: string
+          updated_at?: string
+          featured_image_url?: string | null
+          slug?: string
+        }
+        Update: {
+          id?: number
+          title?: string
+          content?: string
+          author?: string
+          published?: boolean
+          created_at?: string
+          updated_at?: string
+          featured_image_url?: string | null
+          slug?: string
+        }
+        Relationships: []
+      }
+      languages: {
+        Row: {
+          language_id: number
+          language_name: string
+        }
+        Insert: {
+          language_id?: number
+          language_name: string
+        }
+        Update: {
+          language_id?: number
+          language_name?: string
+        }
+        Relationships: []
+      }
+      locations: {
+        Row: {
+          location_id: number
+          city: string | null
+          province: string | null
+        }
+        Insert: {
+          location_id?: number
+          city?: string | null
+          province?: string | null
+        }
+        Update: {
+          location_id?: number
+          city?: string | null
+          province?: string | null
+        }
+        Relationships: []
+      }
+      organizations: {
+        Row: {
+          organization_id: number
+          organization_name: string
+        }
+        Insert: {
+          organization_id?: number
+          organization_name: string
+        }
+        Update: {
+          organization_id?: number
+          organization_name?: string
+        }
+        Relationships: []
+      }
+      pims_entry_topic: {
+        Row: {
+          pims_id: number
+          topic_id: number
+        }
+        Insert: {
+          pims_id: number
+          topic_id: number
+        }
+        Update: {
+          pims_id?: number
+          topic_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pims_entry_topic_pims_id_fkey"
+            columns: ["pims_id"]
+            referencedRelation: "pims_main"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pims_entry_topic_topic_id_fkey"
+            columns: ["topic_id"]
+            referencedRelation: "topics"
+            referencedColumns: ["topic_id"]
+          },
+        ]
+      }
+      pims_main: {
+        Row: {
+          id: number
+          title: string | null
+          organization_id: number | null
+          location_id: number | null
+          date: string | null
+          summary: string | null
+          source_link: string | null
+        }
+        Insert: {
+          id?: number
+          title?: string | null
+          organization_id?: number | null
+          location_id?: number | null
+          date?: string | null
+          summary?: string | null
+          source_link?: string | null
+        }
+        Update: {
+          id?: number
+          title?: string | null
+          organization_id?: number | null
+          location_id?: number | null
+          date?: string | null
+          summary?: string | null
+          source_link?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pims_main_location_id_fkey"
+            columns: ["location_id"]
+            referencedRelation: "locations"
+            referencedColumns: ["location_id"]
+          },
+          {
+            foreignKeyName: "pims_main_organization_id_fkey"
+            columns: ["organization_id"]
+            referencedRelation: "organizations"
+            referencedColumns: ["organization_id"]
+          },
+        ]
+      }
+      pims_main_translations: {
+        Row: {
+          id: number
+          pims_id: number
+          language_id: number
+          title: string | null
+          summary: string | null
+          source_link: string | null
+        }
+        Insert: {
+          id?: number
+          pims_id: number
+          language_id: number
+          title?: string | null
+          summary?: string | null
+          source_link?: string | null
+        }
+        Update: {
+          id?: number
+          pims_id?: number
+          language_id?: number
+          title?: string | null
+          summary?: string | null
+          source_link?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pims_main_translations_language_id_fkey"
+            columns: ["language_id"]
+            referencedRelation: "languages"
+            referencedColumns: ["language_id"]
+          },
+          {
+            foreignKeyName: "pims_main_translations_pims_id_fkey"
+            columns: ["pims_id"]
+            referencedRelation: "pims_main"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      topic: {
+        Row: {
+          topic_id: number
+          topic_name: string | null
+        }
+        Insert: {
+          topic_id?: number
+          topic_name?: string | null
+        }
+        Update: {
+          topic_id?: number
+          topic_name?: string | null
+        }
+        Relationships: []
+      }
+      topic_translations: {
+        Row: {
+          id: number
+          topic_id: number
+          language_id: number
+          translated_topic: string | null
+        }
+        Insert: {
+          id?: number
+          topic_id: number
+          language_id: number
+          translated_topic?: string | null
+        }
+        Update: {
+          id?: number
+          topic_id?: number
+          language_id?: number
+          translated_topic?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "topic_translations_language_id_fkey"
+            columns: ["language_id"]
+            referencedRelation: "languages"
+            referencedColumns: ["language_id"]
+          },
+          {
+            foreignKeyName: "topic_translations_topic_id_fkey"
+            columns: ["topic_id"]
+            referencedRelation: "topic"
+            referencedColumns: ["topic_id"]
+          },
+        ]
+      }
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      [_ in never]: never
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
+}
+
